@@ -6,9 +6,7 @@ import {
 	redirect,
 } from "react-router";
 import type { Route } from "./+types/root";
-
 import appStylesHref from "./app.css?url";
-
 import { createEmptyContact } from "./data";
 
 export async function action() {
@@ -16,12 +14,9 @@ export async function action() {
 	return redirect(`/contacts/${contact.id}/edit`);
 }
 
-// The Layout component is a special export for the root route.
-// It acts as your document's "app shell" for all route components, HydrateFallback, and ErrorBoundary
-// For more information, see https://reactrouter.com/explanation/special-files#layout-export
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="ja">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,8 +31,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	);
 }
 
-// The top most error boundary for the app, rendered when your app throws an error
-// For more information, see https://reactrouter.com/start/framework/route-module#errorboundary
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 	let message = "Oops!";
 	let details = "An unexpected error occurred.";

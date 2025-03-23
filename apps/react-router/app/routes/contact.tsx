@@ -1,5 +1,4 @@
 import { Form, useFetcher } from "react-router";
-
 import type { ContactRecord } from "../data";
 import { getContact, updateContact } from "../data";
 import type { Route } from "./+types/contact";

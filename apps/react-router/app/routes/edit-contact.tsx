@@ -1,7 +1,6 @@
 import { Form, redirect, useNavigate } from "react-router";
-import type { Route } from "./+types/edit-contact";
-
 import { getContact, updateContact } from "../data";
+import type { Route } from "./+types/edit-contact";
 
 export async function action({ params, request }: Route.ActionArgs) {
 	const formData = await request.formData();

@@ -1,6 +1,7 @@
 {
 	// Biome
 	"editor.defaultFormatter": "biomejs.biome",
+	"[css]": { "editor.defaultFormatter": "biomejs.biome" },
 	"[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
@@ -11,5 +12,5 @@
 	"prettier.enable": false,
 
 	// cSpell
-	"cSpell.words": ["biomejs", "isbot", "turbopack"]
+	"cSpell.words": ["biomejs", "isbot", "reactrouter", "turbopack"]
 }
