@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": [".next", ".react-router", "build"]
+		"ignore": [".turbo", ".next", ".react-router", "build"]
 	},
 	"formatter": {
 		"enabled": true
