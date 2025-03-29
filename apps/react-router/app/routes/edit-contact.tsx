@@ -1,5 +1,5 @@
+import { getContact, updateContact } from "@repo/data";
 import { Form, redirect, useNavigate } from "react-router";
-import { getContact, updateContact } from "../data";
 import type { Route } from "./+types/edit-contact";
 
 export async function action({ params, request }: Route.ActionArgs) {
@@ -22,7 +22,7 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
 	const navigate = useNavigate();
 
 	return (
-		<Form key={contact.id} id="contact-form" method="post">
+		<Form id="contact-form" key={contact.id} method="post">
 			<p>
 				<span>Name</span>
 				<input

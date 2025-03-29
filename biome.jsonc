@@ -1,0 +1,45 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.0-beta.1/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"!**/node_modules",
+			"!**/.turbo",
+			"!**/.next",
+			"!**/.react-router",
+			"!**/build",
+			"!**/dist"
+		]
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"nursery": {
+				"noImgElement": "off"
+			}
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"useSortedAttributes": "on",
+				"useSortedProperties": "on",
+				"organizeImports": "on"
+			}
+		}
+	},
+	"javascript": {
+		"globals": ["React"]
+	}
+}

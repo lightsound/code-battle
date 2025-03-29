@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // 🛑 Nothing in here has anything to do with React Router, it's just a fake database
 ////////////////////////////////////////////////////////////////////////////////
+// cspell:disable -- disables checking for this file.
 
 import { matchSorter } from "match-sorter";
 // @ts-expect-error - no types, but it's a tiny function
@@ -29,9 +30,9 @@ const fakeContacts = {
 	records: {} as Record<string, ContactRecord>,
 
 	async getAll(): Promise<ContactRecord[]> {
-		return Object.keys(fakeContacts.records)
-			.map((key) => fakeContacts.records[key])
-			.sort(sortBy("-createdAt", "last"));
+		return Object.values(fakeContacts.records).sort(
+			sortBy("-createdAt", "last"),
+		);
 	},
 
 	async get(id: string): Promise<ContactRecord | null> {

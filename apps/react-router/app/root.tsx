@@ -1,13 +1,13 @@
+import { createEmptyContact } from "@repo/data";
 import {
+	isRouteErrorResponse,
 	Outlet,
+	redirect,
 	Scripts,
 	ScrollRestoration,
-	isRouteErrorResponse,
-	redirect,
 } from "react-router";
 import type { Route } from "./+types/root";
 import appStylesHref from "./app.css?url";
-import { createEmptyContact } from "./data";
 
 export async function action() {
 	const contact = await createEmptyContact();
@@ -19,8 +19,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 		<html lang="ja">
 			<head>
 				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="stylesheet" href={appStylesHref} />
+				<meta content="width=device-width, initial-scale=1" name="viewport" />
+				<link href={appStylesHref} rel="stylesheet" />
 			</head>
 			<body>
 				{children}

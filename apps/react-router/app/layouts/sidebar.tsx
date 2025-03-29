@@ -1,3 +1,4 @@
+import { getContacts } from "@repo/data";
 import { useEffect } from "react";
 import {
 	Form,
@@ -7,7 +8,6 @@ import {
 	useNavigation,
 	useSubmit,
 } from "react-router";
-import { getContacts } from "../data";
 import type { Route } from "./+types/sidebar";
 
 export async function loader({ request }: Route.LoaderArgs) {
