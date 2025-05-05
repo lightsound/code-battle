@@ -4,10 +4,9 @@
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"verbatimModuleSyntax": true,
-		"noEmit": true,
 		"types": ["node", "vite/client"],
 		"module": "ES2022",
-		"moduleResolution": "bundler",
+		"moduleResolution": "Bundler",
 		"moduleDetection": "auto",
 		"declaration": false,
 		"declarationMap": false,

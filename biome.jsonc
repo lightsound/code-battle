@@ -13,6 +13,9 @@
 			"!**/.turbo/**",
 			"!**/.next/**",
 			"!**/.react-router/**",
+			"!**/.vinxi/**",
+			"!**/.output/**",
+			"!**/routeTree.gen.ts",
 			"!**/build/**",
 			"!**/dist/**"
 		]

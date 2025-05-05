@@ -24,6 +24,12 @@
 		"nuqs",
 		"reactrouter",
 		"turbopack",
-		"upfetch"
-	]
+		"upfetch",
+		"vercel",
+		"vinxi"
+	],
+
+	"files.readonlyInclude": {
+		"**/apps/tanstack-start/**/routeTree.gen.ts": true
+	}
 }
