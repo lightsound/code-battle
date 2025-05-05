@@ -1,6 +1,7 @@
 import { createEmptyContact } from "@repo/data";
 import {
 	isRouteErrorResponse,
+	Meta,
 	Outlet,
 	redirect,
 	Scripts,
@@ -8,6 +9,14 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import appStylesHref from "./app.css?url";
+
+export function meta() {
+	return [
+		{ charSet: "utf-8" },
+		{ name: "viewport", content: "width=device-width, initial-scale=1" },
+		{ title: "Code Battle React Router" },
+	];
+}
 
 export async function action() {
 	const contact = await createEmptyContact();
@@ -18,8 +27,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="ja">
 			<head>
-				<meta charSet="utf-8" />
-				<meta content="width=device-width, initial-scale=1" name="viewport" />
+				<Meta />
 				<link href={appStylesHref} rel="stylesheet" />
 			</head>
 			<body>

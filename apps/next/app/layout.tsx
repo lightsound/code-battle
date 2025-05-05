@@ -1,14 +1,16 @@
-import { NuqsAdapter } from "nuqs/adapters/next";
-import "./globals.css";
+import "./app.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Code Battle Next.js",
+};
 
 export default function RootLayout({
 	children,
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="ja">
-			<body>
-				<NuqsAdapter>{children}</NuqsAdapter>
-			</body>
+			<body>{children}</body>
 		</html>
 	);
 }

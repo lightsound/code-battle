@@ -1,3 +1,3 @@
 export default function Home() {
-	return <p>React Router Home</p>;
+	return <p>Next.js Home</p>;
 }

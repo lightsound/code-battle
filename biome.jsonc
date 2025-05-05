@@ -9,12 +9,12 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!**/node_modules",
-			"!**/.turbo",
-			"!**/.next",
-			"!**/.react-router",
-			"!**/build",
-			"!**/dist"
+			"!**/node_modules/**",
+			"!**/.turbo/**",
+			"!**/.next/**",
+			"!**/.react-router/**",
+			"!**/build/**",
+			"!**/dist/**"
 		]
 	},
 	"formatter": {

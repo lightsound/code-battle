@@ -9,8 +9,12 @@
 		"quickfix.biome": "explicit",
 		"source.organizeImports.biome": "explicit"
 	},
-	"biome.experimental.rename": true,
+	"biome.rename": true,
+	"biome.enabled": true,
 	"prettier.enable": false,
+
+	// importの絶対パス・相対パス設定
+	"typescript.preferences.importModuleSpecifier": "shortest",
 
 	// cSpell
 	"cSpell.words": [
