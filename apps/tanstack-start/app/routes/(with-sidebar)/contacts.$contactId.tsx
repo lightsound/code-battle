@@ -64,13 +64,12 @@ function RouteComponent() {
 
 				<div>
 					<Link
-						to="/contacts/$contactId/edit"
 						params={{ contactId: contact.id }}
+						to="/contacts/$contactId/edit"
 					>
 						<button type="button">Edit</button>
 					</Link>
 					<form
-						id="destroy"
 						action={async (formData) => {
 							const response = confirm(
 								"Please confirm you want to delete this record.",
@@ -81,6 +80,7 @@ function RouteComponent() {
 								await router.invalidate();
 							}
 						}}
+						id="destroy"
 					>
 						<button type="submit">Delete</button>
 					</form>

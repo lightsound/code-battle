@@ -8,7 +8,7 @@ import {
 	useNavigation,
 	useSubmit,
 } from "react-router";
-import type { Route } from "./+types/sidebar";
+import type { Route } from "./+types/_sidebar";
 
 export async function loader({ request }: Route.LoaderArgs) {
 	const url = new URL(request.url);

@@ -25,7 +25,7 @@ export default async function Layout({
 		<>
 			<div id="sidebar">
 				<h1>
-					<Link href="about">Next.js Contacts</Link>
+					<Link href="/about">Next.js Contacts</Link>
 				</h1>
 				<div>
 					<Form action="/" id="search-form" replace>

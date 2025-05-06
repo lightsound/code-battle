@@ -1,6 +1,6 @@
 import { getContact, updateContact } from "@repo/data";
 import { Form, redirect, useNavigate } from "react-router";
-import type { Route } from "./+types/edit-contact";
+import type { Route } from "./+types/_sidebar.contacts_.$contactId.edit";
 
 export async function action({ params, request }: Route.ActionArgs) {
 	const formData = await request.formData();

@@ -77,8 +77,8 @@ function RouteComponent() {
 										// 	isActive ? "active" : isPending ? "pending" : ""
 										// }
 										activeProps={{ className: "active" }}
-										to="/contacts/$contactId"
 										params={{ contactId: contact.id }}
+										to="/contacts/$contactId"
 									>
 										{contact.first || contact.last ? (
 											<>

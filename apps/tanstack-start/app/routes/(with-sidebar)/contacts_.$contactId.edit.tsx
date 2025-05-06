@@ -49,8 +49,6 @@ function RouteComponent() {
 
 	return (
 		<form
-			id="contact-form"
-			key={contact.id}
 			action={async (formData) => {
 				const updates = Object.fromEntries(formData);
 				await updateContact(contact.id, updates);
@@ -60,6 +58,8 @@ function RouteComponent() {
 					params: { contactId: contact.id },
 				});
 			}}
+			id="contact-form"
+			key={contact.id}
 		>
 			<p>
 				<span>Name</span>

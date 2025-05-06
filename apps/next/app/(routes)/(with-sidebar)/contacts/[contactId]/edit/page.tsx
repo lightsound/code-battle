@@ -1,6 +1,7 @@
 import { getContact, updateContact } from "@repo/data";
+import { revalidatePath } from "next/cache";
 import Form from "next/form";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { CancelButton } from "./_cancel-button";
 
 export default async function Page({
@@ -15,27 +16,28 @@ export default async function Page({
 		redirect("/");
 	}
 
-	async function submit(formData: FormData) {
+	async function edit(formData: FormData) {
 		"use server";
 		const updates = Object.fromEntries(formData);
 		await updateContact(contactId, updates);
+		revalidatePath("/");
 		redirect(`/contacts/${contactId}`);
 	}
 
 	return (
-		<Form action={submit} id="contact-form" key={contact?.id}>
+		<Form action={edit} id="contact-form">
 			<p>
 				<span>Name</span>
 				<input
 					aria-label="First name"
-					defaultValue={contact?.first}
+					defaultValue={contact.first}
 					name="first"
 					placeholder="First"
 					type="text"
 				/>
 				<input
 					aria-label="Last name"
-					defaultValue={contact?.last}
+					defaultValue={contact.last}
 					name="last"
 					placeholder="Last"
 					type="text"
@@ -44,7 +46,7 @@ export default async function Page({
 			<label>
 				<span>Twitter</span>
 				<input
-					defaultValue={contact?.twitter}
+					defaultValue={contact.twitter}
 					name="twitter"
 					placeholder="@jack"
 					type="text"
@@ -54,7 +56,7 @@ export default async function Page({
 				<span>Avatar URL</span>
 				<input
 					aria-label="Avatar URL"
-					defaultValue={contact?.avatar}
+					defaultValue={contact.avatar}
 					name="avatar"
 					placeholder="https://example.com/avatar.jpg"
 					type="text"
@@ -62,7 +64,7 @@ export default async function Page({
 			</label>
 			<label>
 				<span>Notes</span>
-				<textarea defaultValue={contact?.notes} name="notes" rows={6} />
+				<textarea defaultValue={contact.notes} name="notes" rows={6} />
 			</label>
 			<p>
 				<button type="submit">Save</button>
