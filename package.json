@@ -9,12 +9,17 @@
 		"check-types": "turbo run check-types"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"turbo": "^2.4.4",
-		"typescript": "5.8.2"
+		"@biomejs/biome": "2.0.0-beta.1",
+		"turbo": "^2.5.2",
+		"typescript": "5.8.3"
 	},
 	"packageManager": "pnpm@9.0.0",
 	"engines": {
 		"node": ">=22"
+	},
+	"pnpm": {
+		"overrides": {
+			"esbuild": "^0.25.3"
+		}
 	}
 }

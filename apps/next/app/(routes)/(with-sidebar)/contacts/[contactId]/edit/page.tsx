@@ -1,28 +1,31 @@
-import { Form, redirect, useNavigate } from "react-router";
-import { getContact, updateContact } from "../data";
-import type { Route } from "./+types/edit-contact";
+import { getContact, updateContact } from "@repo/data";
+import { revalidatePath } from "next/cache";
+import Form from "next/form";
+import { redirect } from "next/navigation";
+import { CancelButton } from "./_cancel-button";
 
-export async function action({ params, request }: Route.ActionArgs) {
-	const formData = await request.formData();
-	const updates = Object.fromEntries(formData);
-	await updateContact(params.contactId, updates);
-	return redirect(`/contacts/${params.contactId}`);
-}
+export default async function Page({
+	params,
+}: {
+	params: Promise<{ contactId: string }>;
+}) {
+	const { contactId } = await params;
+	const contact = await getContact(contactId);
 
-export async function loader({ params }: Route.LoaderArgs) {
-	const contact = await getContact(params.contactId);
 	if (!contact) {
-		throw new Response("Not Found", { status: 404 });
+		redirect("/");
 	}
-	return { contact };
-}
 
-export default function EditContact({ loaderData }: Route.ComponentProps) {
-	const { contact } = loaderData;
-	const navigate = useNavigate();
+	async function edit(formData: FormData) {
+		"use server";
+		const updates = Object.fromEntries(formData);
+		await updateContact(contactId, updates);
+		revalidatePath("/");
+		redirect(`/contacts/${contactId}`);
+	}
 
 	return (
-		<Form key={contact.id} id="contact-form" method="post">
+		<Form action={edit} id="contact-form">
 			<p>
 				<span>Name</span>
 				<input
@@ -65,9 +68,7 @@ export default function EditContact({ loaderData }: Route.ComponentProps) {
 			</label>
 			<p>
 				<button type="submit">Save</button>
-				<button onClick={() => navigate(-1)} type="button">
-					Cancel
-				</button>
+				<CancelButton>Cancel</CancelButton>
 			</p>
 		</Form>
 	);
