@@ -30,7 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<link href={appStylesHref} rel="stylesheet" />
 			</head>
-			<body>
+			<body suppressHydrationWarning>
 				{children}
 				<ScrollRestoration />
 				<Scripts />

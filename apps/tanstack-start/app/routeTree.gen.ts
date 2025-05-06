@@ -8,63 +8,162 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
+import { Route as withSidebarRouteImport } from './routes/(with-sidebar)/route'
+import { Route as withSidebarIndexImport } from './routes/(with-sidebar)/index'
+import { Route as withSidebarContactsContactIdImport } from './routes/(with-sidebar)/contacts.$contactId'
+import { Route as withSidebarContactsContactIdEditImport } from './routes/(with-sidebar)/contacts_.$contactId.edit'
+
+// Create Virtual Routes
+
+const AboutLazyImport = createFileRoute('/about')()
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
-  id: '/',
-  path: '/',
+const AboutLazyRoute = AboutLazyImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const withSidebarRouteRoute = withSidebarRouteImport.update({
+  id: '/(with-sidebar)',
   getParentRoute: () => rootRoute,
 } as any)
+
+const withSidebarIndexRoute = withSidebarIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => withSidebarRouteRoute,
+} as any)
+
+const withSidebarContactsContactIdRoute =
+  withSidebarContactsContactIdImport.update({
+    id: '/contacts/$contactId',
+    path: '/contacts/$contactId',
+    getParentRoute: () => withSidebarRouteRoute,
+  } as any)
+
+const withSidebarContactsContactIdEditRoute =
+  withSidebarContactsContactIdEditImport.update({
+    id: '/contacts_/$contactId/edit',
+    path: '/contacts/$contactId/edit',
+    getParentRoute: () => withSidebarRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/(with-sidebar)': {
+      id: '/(with-sidebar)'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof withSidebarRouteImport
       parentRoute: typeof rootRoute
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutLazyImport
+      parentRoute: typeof rootRoute
+    }
+    '/(with-sidebar)/': {
+      id: '/(with-sidebar)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof withSidebarIndexImport
+      parentRoute: typeof withSidebarRouteImport
+    }
+    '/(with-sidebar)/contacts/$contactId': {
+      id: '/(with-sidebar)/contacts/$contactId'
+      path: '/contacts/$contactId'
+      fullPath: '/contacts/$contactId'
+      preLoaderRoute: typeof withSidebarContactsContactIdImport
+      parentRoute: typeof withSidebarRouteImport
+    }
+    '/(with-sidebar)/contacts_/$contactId/edit': {
+      id: '/(with-sidebar)/contacts_/$contactId/edit'
+      path: '/contacts/$contactId/edit'
+      fullPath: '/contacts/$contactId/edit'
+      preLoaderRoute: typeof withSidebarContactsContactIdEditImport
+      parentRoute: typeof withSidebarRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface withSidebarRouteRouteChildren {
+  withSidebarIndexRoute: typeof withSidebarIndexRoute
+  withSidebarContactsContactIdRoute: typeof withSidebarContactsContactIdRoute
+  withSidebarContactsContactIdEditRoute: typeof withSidebarContactsContactIdEditRoute
+}
+
+const withSidebarRouteRouteChildren: withSidebarRouteRouteChildren = {
+  withSidebarIndexRoute: withSidebarIndexRoute,
+  withSidebarContactsContactIdRoute: withSidebarContactsContactIdRoute,
+  withSidebarContactsContactIdEditRoute: withSidebarContactsContactIdEditRoute,
+}
+
+const withSidebarRouteRouteWithChildren =
+  withSidebarRouteRoute._addFileChildren(withSidebarRouteRouteChildren)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof withSidebarIndexRoute
+  '/about': typeof AboutLazyRoute
+  '/contacts/$contactId': typeof withSidebarContactsContactIdRoute
+  '/contacts/$contactId/edit': typeof withSidebarContactsContactIdEditRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/about': typeof AboutLazyRoute
+  '/': typeof withSidebarIndexRoute
+  '/contacts/$contactId': typeof withSidebarContactsContactIdRoute
+  '/contacts/$contactId/edit': typeof withSidebarContactsContactIdEditRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
+  '/(with-sidebar)': typeof withSidebarRouteRouteWithChildren
+  '/about': typeof AboutLazyRoute
+  '/(with-sidebar)/': typeof withSidebarIndexRoute
+  '/(with-sidebar)/contacts/$contactId': typeof withSidebarContactsContactIdRoute
+  '/(with-sidebar)/contacts_/$contactId/edit': typeof withSidebarContactsContactIdEditRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contacts/$contactId'
+    | '/contacts/$contactId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/about' | '/' | '/contacts/$contactId' | '/contacts/$contactId/edit'
+  id:
+    | '__root__'
+    | '/(with-sidebar)'
+    | '/about'
+    | '/(with-sidebar)/'
+    | '/(with-sidebar)/contacts/$contactId'
+    | '/(with-sidebar)/contacts_/$contactId/edit'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  withSidebarRouteRoute: typeof withSidebarRouteRouteWithChildren
+  AboutLazyRoute: typeof AboutLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  withSidebarRouteRoute: withSidebarRouteRouteWithChildren,
+  AboutLazyRoute: AboutLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +176,32 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/(with-sidebar)",
+        "/about"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/(with-sidebar)": {
+      "filePath": "(with-sidebar)/route.tsx",
+      "children": [
+        "/(with-sidebar)/",
+        "/(with-sidebar)/contacts/$contactId",
+        "/(with-sidebar)/contacts_/$contactId/edit"
+      ]
+    },
+    "/about": {
+      "filePath": "about.lazy.tsx"
+    },
+    "/(with-sidebar)/": {
+      "filePath": "(with-sidebar)/index.tsx",
+      "parent": "/(with-sidebar)"
+    },
+    "/(with-sidebar)/contacts/$contactId": {
+      "filePath": "(with-sidebar)/contacts.$contactId.tsx",
+      "parent": "/(with-sidebar)"
+    },
+    "/(with-sidebar)/contacts_/$contactId/edit": {
+      "filePath": "(with-sidebar)/contacts_.$contactId.edit.tsx",
+      "parent": "/(with-sidebar)"
     }
   }
 }

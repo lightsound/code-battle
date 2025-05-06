@@ -26,9 +26,9 @@ export function SearchInput() {
 				defaultValue={q || ""}
 				id={QUERY_KEY}
 				name={QUERY_KEY}
-				onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-					e.preventDefault();
-					e.currentTarget.form?.requestSubmit();
+				onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+					event.preventDefault();
+					event.currentTarget.form?.requestSubmit();
 				}}
 				placeholder="Search"
 				type="search"

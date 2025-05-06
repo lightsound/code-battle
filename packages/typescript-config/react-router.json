@@ -10,6 +10,7 @@
 		"moduleDetection": "auto",
 		"declaration": false,
 		"declarationMap": false,
-		"incremental": false
+		"incremental": false,
+		"noEmit": true
 	}
 }

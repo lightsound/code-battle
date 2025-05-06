@@ -8,8 +8,10 @@
 		"start": "vinxi start"
 	},
 	"dependencies": {
+		"@repo/data": "workspace:*",
 		"@tanstack/react-router": "^1.119.0",
-		"@tanstack/react-start": "^1.119.2",
+		"@tanstack/react-router-devtools": "^1.119.0",
+		"@tanstack/react-start": "^1.119.0",
 		"esbuild": "0.25.3",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",

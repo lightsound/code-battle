@@ -9,9 +9,9 @@ export function Favorite({
 }: {
 	contact: Pick<ContactRecord, "id" | "favorite">;
 }) {
-	const [favorite, toggleFavorite] = useOptimistic(
+	const [favorite, toggleFavorite] = useOptimistic<unknown, boolean>(
 		contact.favorite,
-		(favorite) => !favorite,
+		(_, optimisticValue) => optimisticValue,
 	);
 
 	const formAction = async (formData: FormData) => {

@@ -4,7 +4,10 @@ import {
 	Outlet,
 	Scripts,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { ReactNode } from "react";
+import appCss from "../app.css?url";
+import favicon from "../favicon.ico?url";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -12,6 +15,10 @@ export const Route = createRootRoute({
 			{ charSet: "utf-8" },
 			{ name: "viewport", content: "width=device-width, initial-scale=1" },
 			{ title: "Code Battle TanStack Start" },
+		],
+		links: [
+			{ rel: "stylesheet", href: appCss },
+			{ rel: "icon", href: favicon },
 		],
 	}),
 	component: RootComponent,
@@ -21,6 +28,7 @@ function RootComponent() {
 	return (
 		<RootDocument>
 			<Outlet />
+			<TanStackRouterDevtools />
 		</RootDocument>
 	);
 }
@@ -31,7 +39,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
 			<head>
 				<HeadContent />
 			</head>
-			<body>
+			<body suppressHydrationWarning>
 				{children}
 				<Scripts />
 			</body>
